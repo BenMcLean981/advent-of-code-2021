@@ -1,4 +1,4 @@
-from solution import Step, read_nums, find_step, map_steps, count_step_ups
+from solution import Step, read_nums, find_step, map_steps, count_step_ups, sliding_window_sum
 
 def test_read_nums():
     assert read_nums("test.txt") == [173, 175, -10]
@@ -14,3 +14,6 @@ def test_map_steps():
 
 def test_count_step_ups():
     assert count_step_ups([Step.UP, Step.DOWN, Step.UP, Step.NONE, Step.NA]) == 2
+
+def test_sliding_window_sum():
+    assert sliding_window_sum([3,4,5,6]) == [12, 15]

@@ -24,6 +24,9 @@ def find_step(prev: Union[None, int], curr: int) -> Step:
     else:
         return Step.NONE
 
+def sliding_window_sum(nums: List[int], size=3) -> List[int]:
+    return [sum(nums[i:i+size]) for i in range(len(nums) - size + 1)]
+
 def map_steps(nums: List[int]) -> List[Step]:
     l = [None, *nums]
 
@@ -37,4 +40,4 @@ if __name__ == "__main__":
     steps = map_steps(depths)
     step_ups = count_step_ups(steps)
 
-    print('Solution is: {}'.format(step_ups))
+    print('Solution to part 1 is: {}'.format(step_ups))
