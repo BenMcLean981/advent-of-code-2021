@@ -3,6 +3,9 @@ from typing import List, Union
 from enum import Enum
 
 
+DEFAULT_FILENAME = "input.txt"
+
+
 class Step(Enum):
     UP = 1
     DOWN = 2
@@ -10,7 +13,7 @@ class Step(Enum):
     NA = 4
 
 
-def read_nums(filename="input.txt") -> List[int]:
+def read_nums(filename=DEFAULT_FILENAME) -> List[int]:
     dirname = os.path.dirname(__file__)
     with open(os.path.join(dirname, filename), 'r') as f:
         return [int(line) for line in f.readlines()]
@@ -42,9 +45,13 @@ def count_step_ups(steps: List[Step]) -> int:
     return sum([1 for step in steps if step == Step.UP])
 
 
-if __name__ == "__main__":
-    depths = read_nums()
-    steps = map_steps(depths)
-    step_ups = count_step_ups(steps)
+def get_step_ups(window_size=1, filename=DEFAULT_FILENAME) -> int:
+    depths = read_nums(filename)
+    windowed = sliding_window_sum(depths, window_size)
+    steps = map_steps(windowed)
+    return count_step_ups(steps)
 
-    print('Solution to part 1 is: {}'.format(step_ups))
+
+if __name__ == "__main__":
+    print('Solution to part 1 is: {}'.format(get_step_ups()))
+    print('Solution to part 2 is: {}'.format(get_step_ups(3)))
