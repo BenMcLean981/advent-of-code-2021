@@ -1,4 +1,5 @@
 from typing import List
+import os
 
 
 class Nyte:
@@ -15,3 +16,10 @@ class Nyte:
 
     def __str__(self) -> str:
         return self.__repr__()
+
+
+def read_nytes(filename="input.txt") -> List[Nyte]:
+    dirname = os.path.dirname(__file__)
+    with open(os.path.join(dirname, filename), 'r') as f:
+        str_bits = [line.strip() for line in f.readlines()]
+        return [Nyte([b == "1" for b in bits]) for bits in str_bits]
