@@ -17,3 +17,11 @@ def read_commands(filename="input.txt") -> List[Vector]:
     with open(os.path.join(dirname, filename), 'r') as f:
         lines = [line.split(" ") for line in f.readlines()]
         return [to_vector(d, float(dist)) for [d, dist] in lines]
+
+
+def combine_vectors(vectors: List[Vector]) -> Vector:
+    x = sum([v.x for v in vectors])
+    y = sum([v.y for v in vectors])
+    z = sum([v.z for v in vectors])
+
+    return Vector(x, y, z)

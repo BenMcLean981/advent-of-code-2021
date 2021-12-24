@@ -12,3 +12,9 @@ class Vector:
         # I prefer classes for encapsulation, but I like to write non-modifying
         # pure functions like this one, it doesn't change any of the inputs.
         return Vector(self.x + other.x, self.y + other.y, self.z + other.z)
+
+    def __repr__(self) -> str:
+        return (f"<{self.x}, {self.y}, {self.z}>")
+
+    def __str__(self) -> str:
+        return (f"<{self.x}, {self.y}, {self.z}>")
