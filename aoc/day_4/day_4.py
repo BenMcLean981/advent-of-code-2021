@@ -101,12 +101,32 @@ class Game:
                     return board
         return None
 
+    def find_last_win(self) -> BingoBoard:
+        # unclear how to handle multiple wins
+        for n in self.call_order:
+            self.next_call_idx += 1
+            not_won = [board for board in self.boards if not board.has_won()]
+            if (len(not_won) == 1):
+                last_win = not_won[0]
+                last_win.mark_number(n)  # mark the last number
+                return last_win
+            for board in not_won:
+                board.mark_number(n)
+        return None
 
-def main(filename="input.txt") -> int:
+
+def get_part_one(filename="input.txt") -> int:
     game = Game.make_from_file(filename)
     board = game.find_first_win()
     return board.compute_score(game.call_order[game.next_call_idx-1])
 
 
+def get_part_two(filename="input.txt") -> int:
+    game = Game.make_from_file(filename)
+    board = game.find_last_win()
+    return board.compute_score(game.call_order[game.next_call_idx-1])
+
+
 if __name__ == "__main__":
-    print(main())
+    print(f"Part 1: {get_part_one()}")
+    print(f"Part 2: {get_part_two()}")

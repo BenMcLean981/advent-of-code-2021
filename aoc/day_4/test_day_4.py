@@ -105,5 +105,9 @@ def test_game_make_from_file():
     ]
 
 
-def test_play_game():
-    assert day_4.main("test.txt") == 4512
+def test_get_part_one():
+    assert day_4.get_part_one("test.txt") == 4512
+
+
+def test_get_part_two():
+    assert day_4.get_part_two("test.txt") == 1924
