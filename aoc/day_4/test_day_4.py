@@ -78,6 +78,14 @@ def test_bingo_board_mark_number():
     assert bingo_board.grid[1][1].is_marked == False
 
 
+def test_bingo_board_get_all_cells():
+    bingo_board = day_4.BingoBoard.make_from_int_list([[1, 2], [3, 4]])
+    assert bingo_board.get_all_cells() == [
+        day_4.BingoBoardCell(1), day_4.BingoBoardCell(2),
+        day_4.BingoBoardCell(3), day_4.BingoBoardCell(4)
+    ]
+
+
 def test_game_make_from_file():
     game = day_4.Game.make_from_file('test.txt')
 
