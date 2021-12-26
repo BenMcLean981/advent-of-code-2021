@@ -43,7 +43,7 @@ def test_bingo_board_get_diagonals():
 def test_bingo_board_get_lines():
     bingo_board = day_4.BingoBoard.make_from_int_list([[1, 2], [3, 4]])
     assert bingo_board.get_all_lines() == bingo_board.get_rows() + \
-        bingo_board.get_cols() + bingo_board.get_diagonals()
+        bingo_board.get_cols()
 
 
 def test_bingo_board_has_won():
@@ -103,3 +103,7 @@ def test_game_make_from_file():
         24, 21, 9, 14, 16, 7, 6, 10, 3,
         18, 5, 1, 12, 20, 15, 19
     ]
+
+
+def test_play_game():
+    assert day_4.main("test.txt") == 4512

@@ -9,7 +9,16 @@ class BingoBoardCell:
     is_marked: bool = False
 
     def mark_number(self, n: int) -> "BingoBoardCell":
-        return BingoBoardCell(value=self.value, is_marked=self.value == n)
+        return BingoBoardCell(value=self.value, is_marked=(self.value == n or self.is_marked))
+
+    def __str__(self) -> str:
+        if self.is_marked:
+            return "*"
+        else:
+            return str(self.value)
+
+    def __repr__(self) -> str:
+        return str(self)
 
 
 class BingoBoard:
@@ -36,7 +45,7 @@ class BingoBoard:
         ]
 
     def get_all_lines(self) -> List[List[BingoBoardCell]]:
-        return self.get_rows() + self.get_cols() + self.get_diagonals()
+        return self.get_rows() + self.get_cols()  # diagonals do not count?
 
     def has_won(self) -> bool:
         lines = self.get_all_lines()
@@ -58,6 +67,7 @@ class BingoBoard:
 class Game:
     boards: List[BingoBoard]
     call_order: List[int]
+    next_call_idx = 0
 
     def __init__(self, boards: List[BingoBoard], call_order: List[int]):
         self.boards = boards
@@ -81,3 +91,22 @@ class Game:
                 boards.append(BingoBoard.make_from_int_list(rows))
 
             return Game(boards, call_order)
+
+    def find_first_win(self) -> BingoBoard:
+        for n in self.call_order:
+            self.next_call_idx += 1
+            for board in self.boards:
+                board.mark_number(n)
+                if board.has_won():
+                    return board
+        return None
+
+
+def main(filename="input.txt") -> int:
+    game = Game.make_from_file(filename)
+    board = game.find_first_win()
+    return board.compute_score(game.call_order[game.next_call_idx-1])
+
+
+if __name__ == "__main__":
+    print(main())
