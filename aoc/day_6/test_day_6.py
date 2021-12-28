@@ -1,19 +1,6 @@
 import aoc.day_6.day_6 as day_6
 
 
-def test_lanternfish_init():
-    lanternfish = day_6.LanternFish(1)
-    assert lanternfish.timer == 1
-
-
-def test_lanternfish_run():
-    lanternfish = day_6.LanternFish(1)
-    assert lanternfish.run() == None
-    assert lanternfish.timer == 0
-    assert lanternfish.run() == day_6.LanternFish(8)
-    assert lanternfish.timer == 6
-
-
 def test_population_init():
     population = day_6.Population([0, 1, 1, 2, 1, 0, 0, 0, 0])
     assert population.timers == [0, 1, 1, 2, 1, 0, 0, 0, 0]
